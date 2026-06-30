@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#2E3B28" />
+    <meta
+      name="description"
+      content="Celebrate Ashwin and Akshata at Trillium Nursery Farm in Redmond on August 16, 2026."
+    />
+    <title>Ashwin &amp; Akshata · 16 August 2026</title>
+    <meta property="og:title" content="Ashwin & Akshata · Wedding Celebration" />
+    <meta
+      property="og:description"
+      content="Join Ashwin and Akshata for a day of celebration at Trillium Nursery Farm in Redmond."
+    />
+    <meta property="og:image" content="logo.png" />
+    <meta property="og:image:alt" content="Ashwin and Akshata monogram logo" />
+    <meta property="og:image:width" content="1254" />
+    <meta property="og:image:height" content="1254" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="logo.png" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="logo.png" />
+    <link rel="preload" as="image" href="logo.png" />
+    <link rel="preload" as="image" href="stamp.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Marcellus&family=Mukta:wght@400;500;600&family=Tiro+Devanagari+Sanskrit&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="stylesheet" href="styles.css" />
+    <script type="application/ld+json" id="event-schema"></script>
+  </head>
+  <body class="pre-open">
+    <canvas id="petal-canvas" aria-hidden="true"></canvas>
+    <div class="cursor-dot" aria-hidden="true"></div>
+    <div class="akshata-vignette" aria-hidden="true"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+
+    <!-- ===== FULL-SCREEN INVITATION OPENER =====
+         A closed, wax-sealed envelope. Pressing "Open" breaks the seal and
+         folds the flap, then hands off to the cinematic entry video below. -->
+    <div class="invite-overlay" id="invite-overlay" data-stage="sealed">
+      <div class="invite-glow" aria-hidden="true"></div>
+
+      <div class="envelope" id="envelope">
+        <!-- Back wall of the envelope -->
+        <div class="env-back" aria-hidden="true"></div>
+
+        <!-- Pocket front -->
+        <div class="env-pocket" aria-hidden="true">
+          <span class="env-monogram">A &amp; A</span>
+        </div>
+        <!-- Triangular flap that folds open from the top -->
+        <div class="env-flap" aria-hidden="true"></div>
+
+        <span class="wax-seal" id="wax-seal" aria-hidden="true">
+          <img src="stamp.png" alt="" />
+        </span>
+      </div>
+
+      <button class="btn primary open-btn" id="open-btn" type="button">Open</button>
+      <p class="invite-hint" id="invite-hint">Press open to begin</p>
+    </div>
+
+    <!-- ===== CINEMATIC ENTRY VIDEO ===== walking through the door, into the site -->
+    <div class="entry-cinema" id="entry-cinema" aria-hidden="true">
+      <video id="entry-video" playsinline muted preload="auto"
+        aria-label="Ashwin and Akshata walking through a temple doorway">
+        <source src="entry.mp4" type="video/mp4" />
+      </video>
+      <div class="entry-vignette" aria-hidden="true"></div>
+      <button class="entry-skip" id="entry-skip" type="button">Skip&nbsp;›</button>
+    </div>
+
+    <main id="experience" aria-hidden="true">
+      <!-- ===== ACT I · HERO ===== -->
+      <section class="act hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero-layer hero-back" data-speed="0.14">
+          <img src="assets/images/temple-wide.png" alt="South Indian temple garden with a gopuram, brass lamps, and hanging floral garlands" />
+        </div>
+        <div class="hero-scrim" aria-hidden="true"></div>
+
+        <button class="temple-bell bell-right" type="button" aria-label="Ring the temple bell">
+          <img src="assets/svg/temple-bell.svg" alt="" />
+        </button>
+
+        <div class="hero-copy">
+          <h1 id="hero-title" class="couple-names">
+            <span class="name name-groom" data-text="Ashwin">Ashwin</span>
+            <span class="ampersand" tabindex="0" aria-label="and">&amp;</span>
+            <span class="name name-bride" data-text="Akshata">Akshata</span>
+          </h1>
+          <p class="invite-line">
+            A new chapter begins, and we would love to share it with you.
+          </p>
+
+          <div class="wedding-details">
+            <strong>Sunday, August 16, 2026</strong>
+            <span>Trillium Nursery Farm, Redmond</span>
+          </div>
+
+          <div class="countdown" id="countdown" role="timer" aria-label="Countdown to the wedding">
+            <div>
+              <strong id="countdown-days">00</strong>
+              <span>Days</span>
+            </div>
+            <div>
+              <strong id="countdown-hours">00</strong>
+              <span>Hours</span>
+            </div>
+            <div>
+              <strong id="countdown-minutes">00</strong>
+              <span>Minutes</span>
+            </div>
+            <div>
+              <strong id="countdown-seconds">00</strong>
+              <span>Seconds</span>
+            </div>
+          </div>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#rsvp">RSVP</a>
+            <button class="btn ghost" type="button" data-calendar-all>Add to Calendar</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ===== ACT II · OUR STORY ===== -->
+      <section class="act story-act" id="story" aria-labelledby="story-title">
+        <div class="act-inner story-inner">
+          <header class="story-intro" data-reveal>
+            <div class="kicker"><span>Our Story</span></div>
+            <h2 id="story-title">The road that brought us here.</h2>
+            <p>
+              From a simple hello to the adventures that made us feel at home with each other,
+              this is our story.
+            </p>
+          </header>
+
+          <figure class="story-film" id="story-film" data-reveal>
+            <div class="story-film-glow" aria-hidden="true"></div>
+            <video
+              id="story-video"
+              preload="metadata"
+              poster="assets/images/our-story-poster-v2.jpg"
+              data-landscape-poster="assets/images/our-story-poster-v2.jpg"
+              data-portrait-poster="assets/images/our-story-poster-portrait.png"
+              data-landscape-src="assets/video/our-story-v2.mp4"
+              data-portrait-src="assets/video/our-story-v2-portrait.mp4"
+              aria-label="Our Story: Ashwin and Akshata's animated love story">
+              <source src="assets/video/our-story-v2.mp4" type="video/mp4" />
+              Your browser does not support embedded video.
+              <a href="assets/video/our-story-v2.mp4">Open Our Story video</a>.
+            </video>
+            <noscript>
+              <a class="story-noscript" href="assets/video/our-story-v2.mp4">Open Our Story video</a>
+            </noscript>
+            <button class="story-play" id="story-play" type="button" aria-label="Play Our Story">
+              <span class="story-play-icon" aria-hidden="true"></span>
+              <span>
+                <small>1 minute 32 seconds</small>
+                <strong>Play Our Story</strong>
+              </span>
+            </button>
+            <figcaption>
+              <span>Our Story</span>
+              <span>Best enjoyed with sound</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ===== ACT III · GALLERY ===== -->
+      <section class="act gallery-act" id="gallery" aria-labelledby="gallery-title">
+        <div class="act-inner">
+          <div class="act-heading center" data-reveal>
+            <div class="kicker"><span>Gallery</span></div>
+            <h2 id="gallery-title">A few moments we love.</h2>
+            <p>Little glimpses from the road that brought us here.</p>
+          </div>
+
+          <div class="gallery-viewer" id="gallery-viewer" data-reveal aria-label="Ashwin and Akshata photo gallery">
+            <div class="gallery-stage">
+              <button class="gallery-nav gallery-prev" type="button" id="gallery-prev" aria-label="Previous photo">‹</button>
+              <figure class="gallery-frame">
+                <img id="gallery-image" src="assets/images/gallery/gallery-00-undated-img-1262.jpg" alt="Ashwin and Akshata gallery photo 1" />
+                <figcaption>
+                  <span id="gallery-counter">1 / 8</span>
+                </figcaption>
+              </figure>
+              <button class="gallery-nav gallery-next" type="button" id="gallery-next" aria-label="Next photo">›</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ACT IV · PROCESSION (immersive band) ===== -->
+      <section class="act procession-act" aria-labelledby="procession-title">
+        <div class="procession-media" data-speed="0.2" aria-hidden="true">
+          <img src="assets/images/procession.png" alt="" loading="lazy" />
+        </div>
+        <div class="procession-scrim" aria-hidden="true"></div>
+        <div class="procession-copy" data-reveal>
+          <div class="kicker kicker-light"><span>The Celebration</span></div>
+          <h2 id="procession-title">Tradition, music, and a garden full of joy.</h2>
+          <p>
+            From the sound of nadaswaram to jasmine garlands and joyful dancing, we cannot wait to celebrate
+            each moment of the day with you.
+          </p>
+          <p class="muhurtham-blessing" data-i18n="muhurthamBlessing">
+            May this union, kindled before the sacred fire, be blessed with a lifetime of love, prosperity, and joy.
+          </p>
+        </div>
+      </section>
+
+      <!-- ===== ACT V · EVENTS ===== -->
+      <section class="act events-act" id="events" aria-labelledby="events-title">
+        <div class="act-inner">
+          <div class="act-heading" data-reveal>
+            <div class="kicker"><span>Three Moments</span></div>
+            <h2 id="events-title">One joyful day, many reasons to celebrate.</h2>
+            <p>
+              Every celebration is at <strong id="events-venue-name">Trillium Nursery Farm</strong>.
+              All times are Pacific.
+            </p>
+            <a class="text-link" href="#travel">View venue and map</a>
+          </div>
+          <div class="events-grid" id="events-grid"></div>
+        </div>
+      </section>
+
+      <!-- ===== ACT VI · RSVP ===== -->
+      <section class="act rsvp-act" id="rsvp" aria-labelledby="rsvp-title">
+        <div class="rsvp-scrim" aria-hidden="true"></div>
+        <div class="act-inner">
+          <div class="glass-card" data-reveal>
+            <div class="rsvp-intro">
+              <div class="kicker"><span>RSVP</span></div>
+              <h2 id="rsvp-title" data-i18n="rsvpTitle">Will you join us?</h2>
+              <p data-i18n="rsvpIntro">
+                Tell us which moments you will share with us, so we can plan seating and travel beautifully.
+              </p>
+            </div>
+            <form class="rsvp-form" id="rsvp-form" novalidate>
+              <div class="rsvp-lookup full">
+                <div class="rsvp-lookup-compact">
+                  <div class="rsvp-lookup-copy">
+                    <h3 id="rsvp-lookup-title">Already replied?</h3>
+                    <p id="rsvp-lookup-note">Enter the same phone number to retrieve and edit your RSVP.</p>
+                  </div>
+                  <button class="btn primary" type="button" id="rsvp-show-lookup">Retrieve RSVP</button>
+                </div>
+                <div class="rsvp-lookup-body" id="rsvp-lookup-body" hidden>
+                  <div>
+                    <h3>Retrieve your RSVP</h3>
+                    <p>Enter the same phone number to retrieve and edit your RSVP.</p>
+                  </div>
+                  <div class="rsvp-lookup-row">
+                    <label class="sr-only" for="rsvp-lookup-phone">Phone number used for RSVP</label>
+                    <select id="rsvp-lookup-country" aria-label="Lookup country code">
+                      <option value="+1">USA +1</option>
+                      <option value="+91">India +91</option>
+                    </select>
+                    <input id="rsvp-lookup-phone" type="tel" autocomplete="tel-national" inputmode="tel" placeholder="425 555 0123" />
+                    <button class="btn primary" type="button" id="rsvp-lookup-button">Find RSVP</button>
+                  </div>
+                </div>
+                <p class="rsvp-status" id="rsvp-status" role="status" aria-live="polite"></p>
+                <div class="rsvp-summary" id="rsvp-summary" hidden></div>
+              </div>
+              <label class="rsvp-edit-field">
+                <span>Name</span>
+                <input name="name" autocomplete="name" required />
+              </label>
+              <label class="rsvp-edit-field">
+                <span>Phone number</span>
+                <div class="phone-input">
+                  <select name="countryCode" aria-label="Country code" required>
+                    <option value="+1">USA +1</option>
+                    <option value="+91">India +91</option>
+                  </select>
+                  <input name="phone" type="tel" autocomplete="tel-national" inputmode="tel" maxlength="18" placeholder="425 555 0123" required />
+                </div>
+              </label>
+              <label class="rsvp-edit-field">
+                <span>Email</span>
+                <input name="email" type="email" autocomplete="email" inputmode="email" maxlength="160" required />
+              </label>
+              <label class="rsvp-edit-field">
+                <span>Side</span>
+                <select name="side" required>
+                  <option value="">Choose one</option>
+                  <option value="bride">Bride</option>
+                  <option value="groom">Groom</option>
+                </select>
+              </label>
+              <label class="rsvp-edit-field">
+                <span>Guest count</span>
+                <input name="guestCount" type="number" min="1" max="8" value="1" required />
+              </label>
+              <fieldset class="rsvp-choice rsvp-edit-field">
+                <legend>Will you be there?</legend>
+                <label class="check"><input type="radio" name="rsvpStatus" value="attending" checked /> Yes, we will celebrate with you</label>
+                <label class="check"><input type="radio" name="rsvpStatus" value="declined" /> Sorry, we cannot make it</label>
+              </fieldset>
+              <fieldset class="rsvp-events-fieldset rsvp-edit-field">
+                <legend>Events you will attend</legend>
+                <label class="check"><input type="checkbox" name="events" value="muhurtham" /> Wedding &amp; Muhurtham</label>
+                <label class="check"><input type="checkbox" name="events" value="hightea" /> High Tea &amp; Games</label>
+                <label class="check"><input type="checkbox" name="events" value="sangeet" /> Reception &amp; Sangeet</label>
+              </fieldset>
+              <fieldset class="room-request-fieldset rsvp-edit-field full">
+                <legend>Room request</legend>
+                <p class="field-note">Choose the one night you would like us to include in the room planning.</p>
+                <label class="check"><input type="radio" name="roomNights" value="none" checked /> No room needed</label>
+                <label class="check"><input type="radio" name="roomNights" value="saturday" /> Saturday, August 15 night</label>
+                <label class="check"><input type="radio" name="roomNights" value="sunday" /> Sunday, August 16 night</label>
+              </fieldset>
+              <label class="full rsvp-edit-field">
+                <span>Song request</span>
+                <textarea name="song" rows="3" placeholder="A song that should absolutely make the party list"></textarea>
+              </label>
+              <input type="hidden" name="code" id="rsvp-code" />
+              <button class="btn primary full rsvp-edit-field" id="rsvp-submit" type="submit">Send RSVP</button>
+              <div class="rsvp-confirmation full" id="rsvp-confirmation" hidden></div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ACT VII · USEFUL DETAILS ===== -->
+      <section class="act utility-act" id="travel" aria-labelledby="utility-title">
+        <div class="act-inner">
+          <div class="act-heading" data-reveal>
+            <div class="kicker"><span>Useful Details</span></div>
+            <h2 id="utility-title">Venue and guest details.</h2>
+          </div>
+          <div class="utility-grid">
+            <article class="utility-panel" data-reveal>
+              <h3>Venue</h3>
+              <p><strong id="venue-name">Trillium Nursery Farm</strong><br /><span id="venue-address">Redmond, WA 98053</span></p>
+              <div class="map-shell" id="map-shell"></div>
+              <button class="copy-pill" id="copy-venue" type="button" data-copy="Trillium Nursery Farm, Redmond, WA 98053">Copy Venue</button>
+            </article>
+            <article class="utility-panel" data-reveal>
+              <h3>Live Stream</h3>
+              <div class="stream-placeholder">
+                <span>Goes live before the muhurtham</span>
+                <p data-i18n="streamNote">The livestream will appear here just before the muhurtham begins.</p>
+              </div>
+            </article>
+            <article class="utility-panel" data-reveal>
+              <h3>Travel &amp; Stay</h3>
+              <div class="accordion" id="travel-accordion"></div>
+            </article>
+            <article class="utility-panel" data-reveal>
+              <h3>Share</h3>
+              <div class="share-actions">
+                <button class="btn ghost" type="button" id="share-whatsapp">WhatsApp</button>
+                <button class="btn ghost" type="button" id="share-telegram">Telegram</button>
+                <button class="btn primary" type="button" id="download-qr">QR PNG</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ACT VIII · REGISTRY ===== -->
+      <section class="act registry-act" id="registry" aria-labelledby="registry-title">
+        <div class="act-inner registry-inner" data-reveal>
+          <div>
+            <div class="kicker"><span>Registry</span></div>
+            <h2 id="registry-title">Your presence is the gift.</h2>
+            <p>
+              For family and friends who have asked, we have shared a small registry with items
+              for the home we are building together.
+            </p>
+          </div>
+          <a class="btn primary" href="https://www.amazon.com/wedding/share/akshwin-together" target="_blank" rel="noopener">Open Registry</a>
+        </div>
+      </section>
+
+      <!-- ===== ACT IX · EXPERIENCE ===== -->
+      <section class="act experience-act" id="play" aria-labelledby="experience-title">
+        <div class="act-inner">
+          <div class="act-heading center" data-reveal>
+            <div class="kicker"><span>A Little Game</span></div>
+            <h2 id="experience-title">A little game while you're here.</h2>
+            <p>Optional fun while you're here - none of it is needed to RSVP.</p>
+          </div>
+          <div class="experience-strip">
+            <article data-reveal>
+              <img src="assets/svg/marigold-cluster.svg" alt="" />
+              <h3>Marigold Catch</h3>
+              <p>A 30-second game: move the basket to catch 20 falling petals and unlock a phone wallpaper.</p>
+              <button class="btn primary" type="button" data-open-game>Play now</button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== ACT X · KOLAM PUZZLE ===== -->
+      <section class="act kolam-act" id="kolam" aria-labelledby="kolam-title">
+        <div class="act-inner kolam-layout">
+          <div class="act-heading" data-reveal>
+            <div class="kicker"><span>A Little Game</span></div>
+            <h2 id="kolam-title">Trace the wedding kolam.</h2>
+            <p>A kolam is the welcome pattern drawn at South Indian doorways. Press and drag
+              from dot to dot to draw the lotus - finish it and a hidden gallery plus a secret
+              RSVP code unlock for you. Stuck? Tap <strong>Draw it for me</strong>.</p>
+            <div class="kolam-board">
+              <svg id="kolam-svg" viewBox="0 0 320 320" role="img" aria-label="Interactive 3 by 3 kolam puzzle. Drag between dots to draw the lotus pattern.">
+                <g id="kolam-guide" aria-hidden="true"></g>
+                <g id="kolam-lines"></g>
+                <g id="kolam-dots"></g>
+              </svg>
+              <div class="kolam-progress" id="kolam-progress" aria-live="polite">0 / 14 lines</div>
+              <div class="kolam-actions">
+                <button class="btn ghost" type="button" id="kolam-reset">Start over</button>
+                <button class="btn primary" type="button" id="kolam-solve">Draw it for me</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="hidden-gallery is-locked" id="hidden-gallery" data-reveal>
+            <div class="gallery-locked" id="gallery-locked">
+              <img class="lock-crest" src="logo.png" alt="" />
+              <span class="unlock-badge">Sealed</span>
+              <p>Solve the kolam to reveal a hidden gallery and the secret RSVP code.</p>
+            </div>
+            <div class="gallery-revealed" id="gallery-revealed" hidden>
+              <span class="unlock-badge unlocked">Unlocked</span>
+              <h3>A little garden, just for you.</h3>
+              <p data-i18n="unlockNote">You traced the wedding kolam. The code GOLDENGARLAND is saved on your RSVP.</p>
+              <div class="gallery-grid">
+                <img src="assets/images/sticker-couple.png" alt="Sticker-style illustration of Ashwin and Akshata with jasmine garlands" loading="lazy" />
+                <img src="assets/images/friends-blessing.png" alt="Friends blessing Ashwin and Akshata with flower petals" loading="lazy" />
+                <img src="assets/images/save-date-front.png" alt="Save the date card for Ashwin and Akshata" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <img class="footer-crest" src="logo.png" alt="Ashwin and Akshata monogram crest" />
+          <p class="footer-compliments">With best compliments from our near &amp; dear</p>
+          <p>Ashwin &amp; Akshata · 16 August 2026 · <span id="footer-hashtag">#AkshwinTogether</span></p>
+          <a class="btn ghost" href="#hero">Back to the top</a>
+        </div>
+      </footer>
+    </main>
+
+    <nav class="chapter-nav" id="chapter-nav" aria-label="Wedding chapters">
+      <button
+        class="chapter-toggle"
+        id="chapter-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="chapter-panel">
+        <span class="chapter-glyph" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+        <span class="chapter-toggle-copy">
+          <small>Explore</small>
+          <strong id="chapter-current">Welcome</strong>
+        </span>
+      </button>
+      <div class="chapter-panel" id="chapter-panel" aria-hidden="true">
+        <div class="chapter-panel-head">
+          <div>
+            <span>Wedding chapters</span>
+            <strong>Go anywhere</strong>
+          </div>
+          <button class="chapter-close" id="chapter-close" type="button" aria-label="Close section navigation">×</button>
+        </div>
+        <div class="chapter-links">
+          <a href="#hero" data-chapter-label="Welcome"><span>01</span><strong>Welcome</strong></a>
+          <a href="#story" data-chapter-label="Our Story"><span>02</span><strong>Our Story</strong></a>
+          <a href="#gallery" data-chapter-label="Gallery"><span>03</span><strong>Gallery</strong></a>
+          <a href="#events" data-chapter-label="Schedule"><span>04</span><strong>Schedule</strong></a>
+          <a href="#rsvp" data-chapter-label="RSVP"><span>05</span><strong>RSVP</strong></a>
+          <a href="#travel" data-chapter-label="Venue"><span>06</span><strong>Venue</strong></a>
+          <a href="#registry" data-chapter-label="Registry"><span>07</span><strong>Registry</strong></a>
+          <a href="#play" data-chapter-label="Game"><span>08</span><strong>Game</strong></a>
+          <a href="#kolam" data-chapter-label="Kolam"><span>09</span><strong>Kolam</strong></a>
+        </div>
+      </div>
+    </nav>
+
+    <dialog class="game-dialog" id="game-dialog">
+      <form method="dialog">
+        <button class="dialog-close" aria-label="Close game">×</button>
+      </form>
+      <h2>Marigold Catch</h2>
+      <p>Move the basket with your finger, mouse, or arrow keys. Catch 20 petals in 30 seconds
+        to unlock a phone wallpaper.</p>
+      <canvas
+        id="game-canvas"
+        width="420"
+        height="520"
+        tabindex="0"
+        role="application"
+        aria-label="Marigold Catch game. Use the left and right arrow keys to move the catcher."
+      ></canvas>
+      <div class="game-status" aria-live="polite">
+        <span id="game-score">0 caught</span>
+        <span id="game-time">30s</span>
+      </div>
+      <div class="game-dialog-actions">
+        <button class="btn primary" type="button" id="game-start">Start game</button>
+        <button class="btn ghost" type="button" id="game-accessible-win">Skip &amp; unlock wallpaper</button>
+      </div>
+      <p class="secret-note" id="secret-note">Unlocked: may your home feel like this garden on ordinary Tuesdays too.</p>
+    </dialog>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js" defer></script>
+    <script src="app.js" defer></script>
+  </body>
+</html>

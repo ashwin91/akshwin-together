@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 560" role="img" aria-labelledby="title desc">
+  <title id="title">Peacock feather accent</title>
+  <desc id="desc">Muted peacock feather with antique gold and sage iridescence.</desc>
+  <defs>
+    <radialGradient id="eye" cx="50%" cy="48%" r="55%">
+      <stop offset="0" stop-color="#FCF7EE"/>
+      <stop offset=".25" stop-color="#BE8E3E"/>
+      <stop offset=".52" stop-color="#747F60"/>
+      <stop offset="1" stop-color="#3D4C37"/>
+    </radialGradient>
+    <linearGradient id="stem" x1="0" x2="1">
+      <stop offset="0" stop-color="#BE8E3E"/>
+      <stop offset="1" stop-color="#747F60"/>
+    </linearGradient>
+  </defs>
+  <rect width="360" height="560" fill="none"/>
+  <path d="M178 520C176 378 174 236 190 76" fill="none" stroke="url(#stem)" stroke-width="7" stroke-linecap="round"/>
+  <g fill="none" stroke-linecap="round" opacity=".78">
+    <path d="M185 112C112 178 66 272 30 388" stroke="#747F60" stroke-width="3"/>
+    <path d="M186 112C256 178 304 274 340 388" stroke="#747F60" stroke-width="3"/>
+    <path d="M183 148C128 210 92 294 72 488" stroke="#BE8E3E" stroke-width="2"/>
+    <path d="M188 148C244 212 276 294 300 488" stroke="#BE8E3E" stroke-width="2"/>
+  </g>
+  <ellipse cx="188" cy="86" rx="90" ry="68" fill="#FCF7EE" stroke="#BE8E3E" stroke-width="5"/>
+  <ellipse cx="188" cy="86" rx="61" ry="46" fill="url(#eye)"/>
+  <ellipse cx="188" cy="86" rx="25" ry="18" fill="#FCF7EE" opacity=".92"/>
+  <ellipse cx="188" cy="86" rx="10" ry="7" fill="#3D4C37"/>
+</svg>

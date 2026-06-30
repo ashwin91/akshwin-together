@@ -1,0 +1,100 @@
+{
+  "siteUrl": "https://akshwin-together.vercel.app",
+  "rsvpEndpoint": "https://script.google.com/macros/s/AKfycbz_7U6uM2h8g1MYeO3KZP0vNeCIsftLHH3wSBuiQI3EsR_382ERBRafXIv_wO2cR0fw8A/exec",
+  "whatsappPhone": "",
+  "couple": {
+    "bride": "Akshata",
+    "groom": "Ashwin",
+    "brideParents": "Shilpa & Srikanth",
+    "groomParents": "Jayanthi & Raghavendran",
+    "hashtag": "#AkshwinTogether"
+  },
+  "date": "2026-08-16",
+  "timezone": "America/Los_Angeles",
+  "venue": {
+    "name": "Trillium Nursery Farm",
+    "address": "Redmond, WA 98053",
+    "city": "Redmond, WA",
+    "mapQuery": "https://maps.app.goo.gl/aGHehKdAZmqBydkt7"
+  },
+  "copy": {
+    "invocationShloka": "॥ श्री लक्ष्मीनृसिंहाय नमः ॥",
+    "invocationLine": "Shubha Vivaha · Inviting you to a sacred union",
+    "invocationBlessing": "Shri Lakshmi Narasimhaya Namaha — with the blessings of our family deity and our elders, we begin.",
+    "parentsLine": "Ashwin, son of Jayanthi & Raghavendran, weds Akshata, daughter of Shilpa & Srikanth",
+    "muhurthamTitle": "Garden Muhurtham",
+    "muhurthamBlessing": "May this union, kindled before the sacred fire, be blessed with a lifetime of love, prosperity, and joy.",
+    "rsvpTitle": "Will you join us?",
+    "rsvpIntro": "Tell us which moments you will share with us, so we can plan seating and travel beautifully.",
+    "unlockNote": "You traced the wedding kolam. The hidden gallery is open, and the code GOLDENGARLAND is saved on your RSVP.",
+    "streamNote": "The livestream will appear here just before the muhurtham begins."
+  },
+  "events": [
+    {
+      "id": "muhurtham",
+      "title": "Wedding & Muhurtham",
+      "start": "2026-08-16T09:30:00-07:00",
+      "end": "2026-08-16T13:00:00-07:00",
+      "timeLabel": "9:30 AM · Muhurtham at 11:15 AM",
+      "note": "The wedding morning begins at 9:30 AM, with the sacred muhurtham at 11:15 AM. Lunch will be served after the muhurtham.",
+      "dressCode": "South Indian traditional",
+      "ritual": "South Indian traditional looks are a lovely fit for the morning, but please treat this as a suggestion. Come comfortable, joyful, and ready to celebrate."
+    },
+    {
+      "id": "hightea",
+      "title": "High Tea & Games",
+      "start": "2026-08-16T16:00:00-07:00",
+      "end": "2026-08-16T17:30:00-07:00",
+      "timeLabel": "4:00 PM",
+      "note": "A relaxed garden afternoon with tea, chai, light bites, games, and conversation",
+      "dressCode": "Dresses & suits",
+      "ritual": "Garden-party dresses, suits, and cheerful colors will feel right at home. The recommendation is optional; the main assignment is having a wonderful afternoon."
+    },
+    {
+      "id": "sangeet",
+      "title": "Reception & Sangeet",
+      "start": "2026-08-16T18:30:00-07:00",
+      "end": "2026-08-16T23:00:00-07:00",
+      "timeLabel": "6:30 PM onwards",
+      "note": "Dinner, music, performances, and dancing under the lights",
+      "dressCode": "Indian or Western evening wear",
+      "ritual": "Festive Indian outfits, western formalwear, evening dresses, suits, and western wear are all welcome. Dress up if you feel like it; dance either way."
+    }
+  ],
+  "travel": [
+    {
+      "title": "Airport",
+      "body": "Seattle-Tacoma International Airport is the easiest arrival point. Plan extra buffer for Sunday traffic toward Redmond."
+    },
+    {
+      "title": "Stay",
+      "body": "A limited set of rooms will be reserved for guests and offered on a first-RSVP basis. Please note whether you would like a room for Saturday, August 15 night or Sunday, August 16 night in the RSVP so we can plan the room blocks."
+    },
+    {
+      "title": "Rental Cars",
+      "body": "Rental cars are available at Seattle-Tacoma International Airport and are the most flexible option for getting to Redmond and around the area. Uber and Lyft also work well locally."
+    }
+  ],
+  "faq": [
+    {
+      "question": "When should we arrive if we want zero drama?",
+      "answer": "For the wedding morning, arriving by 9:30 AM is perfect. The muhurtham is at 11:15 AM, and we would love everyone settled before the sacred moment begins."
+    },
+    {
+      "question": "Do we have to follow the outfit suggestions?",
+      "answer": "Nope. The attire notes are friendly suggestions, not homework. Wear what lets you feel comfortable, festive, and ready for photos, hugs, food, and dancing."
+    },
+    {
+      "question": "Will there be food, or should we pack emergency snacks?",
+      "answer": "You will be fed. There will be wedding lunch, high tea, dinner, and enough celebration energy to make snack planning feel overly serious."
+    },
+    {
+      "question": "What is the easiest way to get around?",
+      "answer": "Rental cars are available at Seattle-Tacoma International Airport and are the most flexible option for Redmond. Uber and Lyft work locally too."
+    },
+    {
+      "question": "Can we take photos?",
+      "answer": "Yes, absolutely. During the muhurtham, please give the priest, mandapam, and photographer clear sight lines. Everywhere else, capture the joy."
+    }
+  ]
+}

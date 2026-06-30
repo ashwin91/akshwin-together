@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 150" role="img" aria-labelledby="title desc">
+  <title id="title">Jasmine garland border</title>
+  <desc id="desc">Sage vine with jasmine buds and marigold beads.</desc>
+  <rect width="900" height="150" fill="none"/>
+  <path d="M20 42c130 90 260 90 430 42s300-52 430 20" fill="none" stroke="#747F60" stroke-width="8" stroke-linecap="round"/>
+  <g fill="#FCF7EE" stroke="#BE8E3E" stroke-width="3">
+    <circle cx="88" cy="76" r="16"/><circle cx="150" cy="100" r="14"/><circle cx="220" cy="106" r="16"/>
+    <circle cx="312" cy="98" r="14"/><circle cx="410" cy="76" r="16"/><circle cx="508" cy="58" r="14"/>
+    <circle cx="610" cy="52" r="16"/><circle cx="710" cy="62" r="14"/><circle cx="802" cy="88" r="16"/>
+  </g>
+  <g fill="#D69A39">
+    <circle cx="118" cy="90" r="9"/><circle cx="262" cy="106" r="8"/><circle cx="458" cy="66" r="9"/>
+    <circle cx="660" cy="54" r="8"/><circle cx="842" cy="104" r="9"/>
+  </g>
+</svg>

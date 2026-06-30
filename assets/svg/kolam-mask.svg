@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420" role="img" aria-labelledby="title desc">
+  <title id="title">Animated kolam mask</title>
+  <desc id="desc">A nine-dot kolam pattern designed for stroke reveal animation.</desc>
+  <rect width="420" height="420" fill="none"/>
+  <g fill="none" stroke="#BE8E3E" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M210 70c62 48 62 132 0 180-62-48-62-132 0-180Z"/>
+    <path d="M120 160c48-62 132-62 180 0-48 62-132 62-180 0Z"/>
+    <path d="M210 170c34 28 34 72 0 100-34-28-34-72 0-100Z"/>
+    <path d="M160 210c28-34 72-34 100 0-28 34-72 34-100 0Z"/>
+    <path d="M92 92c38 16 58 36 68 68M328 92c-38 16-58 36-68 68M92 328c38-16 58-36 68-68M328 328c-38-16-58-36-68-68"/>
+  </g>
+  <g fill="#3D4C37">
+    <circle cx="120" cy="120" r="8"/><circle cx="210" cy="120" r="8"/><circle cx="300" cy="120" r="8"/>
+    <circle cx="120" cy="210" r="8"/><circle cx="210" cy="210" r="8"/><circle cx="300" cy="210" r="8"/>
+    <circle cx="120" cy="300" r="8"/><circle cx="210" cy="300" r="8"/><circle cx="300" cy="300" r="8"/>
+  </g>
+</svg>

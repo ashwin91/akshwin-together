@@ -1,0 +1,19 @@
+.DS_Store
+**/.DS_Store
+
+.vercel/
+.claude/
+.tmp/
+outputs/
+
+# Local authoring/export workspace. The deployed site uses assets/video.
+/video/
+
+# Raw gallery originals are not referenced by the site.
+assets/images/gallery/*.HEIC
+
+# Unreferenced/generated media kept locally but not needed for the site.
+ig_*.png
+assets/images/save-the-date.mp4
+assets/video/our-story-web-v2-base-*.mp4
+assets/video/our-story.mp4

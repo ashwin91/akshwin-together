@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="Ashwin and Akshata monogram wax seal">
+  <rect width="192" height="192" rx="34" fill="#3D4C37"/>
+  <circle cx="96" cy="96" r="68" fill="#BE8E3E"/>
+  <circle cx="96" cy="96" r="58" fill="#F8F1E2"/>
+  <path d="M96 24c5 12 12 17 25 14-5 12-1 20 11 26-12 5-17 12-14 25-12-5-20-1-26 11-5-12-12-17-25-14 5-12 1-20-11-26 12-5 17-12 14-25 12 5 20 1 26-11Z" fill="#DCA896" opacity=".65"/>
+  <text x="96" y="108" text-anchor="middle" font-size="46" font-family="Georgia, serif" fill="#3D4C37">A&amp;A</text>
+</svg>

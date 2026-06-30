@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
+  <title id="title">Marigold cluster</title>
+  <desc id="desc">Muted marigold flower cluster for particles and decorative accents.</desc>
+  <rect width="220" height="220" fill="none"/>
+  <g transform="translate(110 110)">
+    <g fill="#D69A39">
+      <ellipse rx="26" ry="58" transform="rotate(0)"/>
+      <ellipse rx="26" ry="58" transform="rotate(30)"/>
+      <ellipse rx="26" ry="58" transform="rotate(60)"/>
+      <ellipse rx="26" ry="58" transform="rotate(90)"/>
+      <ellipse rx="26" ry="58" transform="rotate(120)"/>
+      <ellipse rx="26" ry="58" transform="rotate(150)"/>
+    </g>
+    <circle r="38" fill="#BE8E3E"/>
+    <circle r="16" fill="#FCF7EE"/>
+  </g>
+  <path d="M56 168c40 20 78 18 112-6" fill="none" stroke="#747F60" stroke-width="8" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Brass vilakku</title>
+  <desc id="desc">Traditional brass lamp with animated flame class hooks.</desc>
+  <rect width="256" height="256" fill="none"/>
+  <g fill="none" stroke="#48372B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path class="flame" d="M128 38c22 24 24 48 0 72-24-24-22-48 0-72Z" fill="#D69A39" stroke="#BE8E3E"/>
+    <path d="M74 112c20 22 88 22 108 0"/>
+    <path d="M94 122h68"/>
+    <path d="M128 122v70"/>
+    <path d="M88 192h80"/>
+    <path d="M68 218h120"/>
+    <path d="M56 112c18 12 40 15 70 8"/>
+    <path d="M200 112c-18 12-40 15-70 8"/>
+  </g>
+  <path d="M80 118c24 10 72 10 96 0" stroke="#BE8E3E" stroke-width="5" stroke-linecap="round"/>
+</svg>
