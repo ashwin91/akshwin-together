@@ -43,6 +43,14 @@ npx --yes vercel@latest deploy --prod --yes --archive=tgz
 
 The upload occasionally fails with an SSL `bad record mac` error. If it does, confirm no deployment was created and retry the exact same command once. Do not switch to custom upload scripts or another project directory.
 
+If the CLI keeps trying to upload the whole working tree, create a clean linked copy under `/private/tmp` with the same `.vercel/project.json`, excluding source-only folders like top-level `video/`, `.git/`, `scripts/`, and unused video variants. Deploy from that clean copy with the same command above. Keep the production story videos under `assets/video/` included.
+
+Deploy packaging notes learned from production:
+
+- `.vercelignore` patterns like `video/` or `video/**` can also match `assets/video/` and remove the live story videos. Use the anchored `/video/` pattern for the top-level source folder.
+- The live site needs `entry.mp4`, `assets/video/our-story-v2.mp4`, and `assets/video/our-story-v2-portrait.mp4`.
+- After any deploy-copy workaround, verify the story video URLs directly with `curl -I`; a good deploy returns `HTTP/2 200` for both `assets/video/our-story-v2.mp4` and `assets/video/our-story-v2-portrait.mp4`.
+
 After deployment, verify the production alias and RSVP API:
 
 ```bash
