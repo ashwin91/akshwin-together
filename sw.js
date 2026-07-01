@@ -1,4 +1,4 @@
-const CACHE_NAME = "akshwin-static-v61";
+const CACHE_NAME = "akshwin-static-v62";
 const CORE_ASSETS = [
   "./",
   "index.html",
@@ -17,6 +17,7 @@ const CORE_ASSETS = [
   "assets/images/procession.png",
   "assets/images/friends-blessing.png",
   "assets/images/sticker-couple.png",
+  "assets/images/marigold-wallpaper-iphone-pro.png",
   "assets/images/our-story-poster-v2.jpg",
   "assets/images/our-story-poster-portrait.png",
   "assets/images/event-high-tea.jpg",

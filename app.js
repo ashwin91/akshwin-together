@@ -1957,151 +1957,22 @@ function downloadIcs(eventId) {
 }
 
 async function downloadWallpaper() {
-  const canvas = document.createElement("canvas");
-  canvas.width = 1080;
-  canvas.height = 1920;
-  const ctx = canvas.getContext("2d");
-
-  const [procession, logo, marigold] = await Promise.all([
-    loadCanvasImage("assets/images/procession.png"),
-    loadCanvasImage("logo.png"),
-    loadCanvasImage("assets/svg/marigold-cluster.svg")
-  ]);
-
-  const base = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  base.addColorStop(0, palette.cream);
-  base.addColorStop(0.45, palette.ivory);
-  base.addColorStop(1, "#E9D9B4");
-  ctx.fillStyle = base;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  if (procession) {
-    drawCoverImage(ctx, procession, 0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "rgba(252, 247, 236, 0.72)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
-
-  const glow = ctx.createRadialGradient(540, 720, 90, 540, 720, 760);
-  glow.addColorStop(0, "rgba(228,196,116,0.52)");
-  glow.addColorStop(0.42, "rgba(216,161,142,0.20)");
-  glow.addColorStop(1, "rgba(110,123,87,0)");
-  ctx.fillStyle = glow;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.strokeStyle = "rgba(185, 138, 56, 0.76)";
-  ctx.lineWidth = 7;
-  ctx.strokeRect(74, 74, canvas.width - 148, canvas.height - 148);
-  ctx.strokeStyle = "rgba(122, 46, 42, 0.22)";
-  ctx.lineWidth = 2;
-  ctx.strokeRect(104, 104, canvas.width - 208, canvas.height - 208);
-
-  for (let i = 0; i < 7; i += 1) {
-    const y = 156 + i * 260;
-    ctx.strokeStyle = i % 2 === 0 ? "rgba(185, 138, 56, 0.18)" : "rgba(122, 46, 42, 0.12)";
-    ctx.lineWidth = 3;
-    ctx.beginPath();
-    ctx.moveTo(120, y);
-    ctx.bezierCurveTo(330, y + 70, 750, y - 70, 960, y);
-    ctx.stroke();
-  }
-
-  if (marigold) {
-    drawDecorImage(ctx, marigold, 46, 42, 190, -10, 0.9);
-    drawDecorImage(ctx, marigold, 846, 42, 190, 12, 0.9);
-    drawDecorImage(ctx, marigold, 54, 1680, 210, -18, 0.86);
-    drawDecorImage(ctx, marigold, 814, 1680, 210, 16, 0.86);
-  }
-
-  if (logo) {
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(540, 510, 160, 0, Math.PI * 2);
-    ctx.fillStyle = "rgba(252, 247, 236, 0.86)";
-    ctx.fill();
-    ctx.strokeStyle = "rgba(185, 138, 56, 0.58)";
-    ctx.lineWidth = 5;
-    ctx.stroke();
-    ctx.clip();
-    ctx.drawImage(logo, 404, 374, 272, 272);
-    ctx.restore();
-  }
-
-  ctx.fillStyle = palette.deepSage;
-  ctx.font = "92px Georgia";
-  ctx.textAlign = "center";
-  ctx.fillText("Ashwin & Akshata", canvas.width / 2, 810);
-  ctx.fillStyle = palette.gold;
-  ctx.font = "48px Georgia";
-  ctx.fillText("August 16, 2026", canvas.width / 2, 900);
-  ctx.fillStyle = palette.maroon;
-  ctx.font = "42px Georgia";
-  ctx.fillText("Trillium Nursery Farm", canvas.width / 2, 980);
-
-  ctx.fillStyle = "rgba(46, 59, 40, 0.82)";
-  ctx.font = "38px Georgia";
-  wrapCanvasText(ctx, "May this little garden bring the wedding joy back to your phone screen.", canvas.width / 2, 1134, 700, 54);
-
-  ctx.fillStyle = palette.deepSage;
-  ctx.font = "34px Georgia";
-  ctx.fillText("#AkshwinTogether", canvas.width / 2, 1488);
-
-  for (let i = 0; i < 90; i += 1) {
-    ctx.save();
-    ctx.translate(Math.random() * canvas.width, Math.random() * canvas.height);
-    ctx.rotate(Math.random() * Math.PI);
-    ctx.fillStyle = i % 3 === 0 ? palette.blush : i % 3 === 1 ? palette.marigold : palette.gold;
-    ctx.globalAlpha = 0.46;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, 9, 20, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  }
-
+  const wallpaperUrl = "assets/images/marigold-wallpaper-iphone-pro.png";
   const link = document.createElement("a");
-  link.download = "akshwin-together-wallpaper.png";
-  link.href = canvas.toDataURL("image/png");
-  link.click();
-}
-
-function loadCanvasImage(src) {
-  return new Promise((resolve) => {
-    const image = new Image();
-    image.onload = () => resolve(image);
-    image.onerror = () => resolve(null);
-    image.src = src;
-  });
-}
-
-function drawCoverImage(ctx, image, x, y, width, height) {
-  const scale = Math.max(width / image.naturalWidth, height / image.naturalHeight);
-  const drawWidth = image.naturalWidth * scale;
-  const drawHeight = image.naturalHeight * scale;
-  ctx.drawImage(image, x + (width - drawWidth) / 2, y + (height - drawHeight) / 2, drawWidth, drawHeight);
-}
-
-function drawDecorImage(ctx, image, x, y, size, rotation, alpha) {
-  ctx.save();
-  ctx.globalAlpha = alpha;
-  ctx.translate(x + size / 2, y + size / 2);
-  ctx.rotate((rotation * Math.PI) / 180);
-  ctx.drawImage(image, -size / 2, -size / 2, size, size);
-  ctx.restore();
-}
-
-function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
-  const words = text.split(" ");
-  let line = "";
-  words.forEach((word, index) => {
-    const testLine = `${line}${word} `;
-    if (ctx.measureText(testLine).width > maxWidth && index > 0) {
-      ctx.fillText(line.trim(), x, y);
-      line = `${word} `;
-      y += lineHeight;
-    } else {
-      line = testLine;
-    }
-  });
-  ctx.fillText(line.trim(), x, y);
+  link.download = "akshwin-together-iphone-pro-wallpaper.png";
+  try {
+    const response = await fetch(wallpaperUrl, { cache: "no-store" });
+    if (!response.ok) throw new Error("Wallpaper unavailable");
+    const blob = await response.blob();
+    const objectUrl = URL.createObjectURL(blob);
+    link.href = objectUrl;
+    link.click();
+    URL.revokeObjectURL(objectUrl);
+  } catch (error) {
+    link.href = wallpaperUrl;
+    link.click();
+  }
+  showToast("iPhone wallpaper downloaded.");
 }
 
 /* =====================================================================
