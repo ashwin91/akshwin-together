@@ -17,15 +17,13 @@ const HEADERS = [
 ];
 
 const EVENT_DETAILS = {
-  muhurtham: "Wedding & Muhurtham - Sunday, August 16, 2026 at 9:30 AM",
-  hightea: "High Tea & Games - Sunday, August 16, 2026 at 4:00 PM",
-  sangeet: "Reception & Sangeet - Sunday, August 16, 2026 at 6:30 PM"
+  muhurtham: "Wedding & Muhurtham - Sunday, August 16, 2026 at 9:30 AM onwards",
+  evening: "Evening Celebration - Sunday, August 16, 2026 at 5:00 PM"
 };
 
-const ROOM_NIGHT_LABELS = {
-  none: "No room needed",
-  saturday: "Saturday, August 15 night",
-  sunday: "Sunday, August 16 night"
+const EVENT_ALIASES = {
+  hightea: "evening",
+  sangeet: "evening"
 };
 
 const VENUE_NAME = "Trillium Nursery Farm";
@@ -70,6 +68,7 @@ function doPost(e) {
       return json_({ ok: false, error: "That phone number is already linked to another RSVP." });
     }
     const now = new Date().toISOString();
+    const attending = normalizeEvents_(body.attending || []);
     const submittedAt = match
       ? sheet.getRange(match.row, 1).getDisplayValue() || now
       : body.submittedAt || now;
@@ -81,12 +80,12 @@ function doPost(e) {
       phone,
       safeText_(body.email),
       safeText_(body.side),
-      safeText_((body.attending || []).join(", ")),
+      safeText_(attending.join(", ")),
       Number(body.guestCount || 1),
       safeText_(body.song),
       safeText_(body.code),
-      safeText_(body.rsvpStatus || ((body.attending || []).length ? "attending" : "declined")),
-      safeText_((body.roomNights || []).join(", "))
+      safeText_(body.rsvpStatus || (attending.length ? "attending" : "declined")),
+      ""
     ]];
 
     let row;
@@ -154,7 +153,7 @@ function rowToRecord_(sheet, row) {
     phone: values[3],
     email: values[5],
     side: values[6],
-    attending: values[7] ? values[7].split(",").map((value) => value.trim()).filter(Boolean) : [],
+    attending: normalizeEvents_(values[7] ? values[7].split(",").map((value) => value.trim()).filter(Boolean) : []),
     guestCount: Number(values[8] || 1),
     song: values[9],
     code: values[10],
@@ -173,9 +172,6 @@ function sendConfirmationEmail_(record, action) {
   const events = record.attending
     .map((id) => EVENT_DETAILS[id] || id)
     .join("\n");
-  const roomNights = record.roomNights
-    .map((night) => ROOM_NIGHT_LABELS[night] || night)
-    .join(", ");
   const firstName = String(record.name || "there").split(/\s+/)[0];
   const editUrl = `${SITE_URL}?rsvp=edit&phone=${encodeURIComponent(record.phone || "")}#rsvp`;
   const calendarUrl = buildCalendarUrl_(record, attending, events);
@@ -190,7 +186,6 @@ function sendConfirmationEmail_(record, action) {
     `Response: ${attending ? "Joyfully attending" : "Unable to attend"}`,
     attending ? `Guests: ${record.guestCount}` : "",
     attending && events ? `Events:\n${events}` : "",
-    attending ? `Room request: ${roomNights || "No room requested"}` : "",
     "",
     `Venue: ${VENUE_NAME}, ${VENUE_ADDRESS}`,
     attending ? `${EMAIL_CALENDAR_LABEL}: ${calendarUrl}` : "",
@@ -207,7 +202,7 @@ function sendConfirmationEmail_(record, action) {
       subject,
       name: "Ashwin & Akshata",
       body: plainBody,
-      htmlBody: buildConfirmationHtml_(record, attending, intro, events, roomNights, action, editUrl, calendarUrl),
+      htmlBody: buildConfirmationHtml_(record, attending, intro, events, action, editUrl, calendarUrl),
       attachments: attending
         ? [Utilities.newBlob(buildIcs_(record), "text/calendar", "ashwin-akshata-wedding.ics")]
         : []
@@ -219,7 +214,7 @@ function sendConfirmationEmail_(record, action) {
   }
 }
 
-function buildConfirmationHtml_(record, attending, intro, events, roomNights, action, editUrl, calendarUrl) {
+function buildConfirmationHtml_(record, attending, intro, events, action, editUrl, calendarUrl) {
   const eventRows = events
     ? events.split("\n").map((event) => `<li>${escapeHtml_(event)}</li>`).join("")
     : "";
@@ -234,10 +229,6 @@ function buildConfirmationHtml_(record, attending, intro, events, roomNights, ac
       <tr>
         <td style="padding:12px 16px;border-top:1px solid #E7D4AC;color:#2E3B28;font-weight:700;vertical-align:top;">Events</td>
         <td style="padding:12px 16px;border-top:1px solid #E7D4AC;color:#3A2A20;text-align:left;"><ul style="margin:0;padding-left:18px;">${eventRows}</ul></td>
-      </tr>
-      <tr>
-        <td style="padding:12px 16px;border-top:1px solid #E7D4AC;color:#2E3B28;font-weight:700;">Room request</td>
-        <td style="padding:12px 16px;border-top:1px solid #E7D4AC;color:#3A2A20;text-align:right;">${escapeHtml_(roomNights || "No room requested")}</td>
       </tr>
     `
     : "";
@@ -337,7 +328,7 @@ function buildCalendarUrl_(record, attending, eventsText) {
 }
 
 function buildIcs_(record) {
-  const selected = (record.attending && record.attending.length ? record.attending : ["muhurtham", "hightea", "sangeet"])
+  const selected = (record.attending && record.attending.length ? normalizeEvents_(record.attending) : ["muhurtham", "evening"])
     .map((id) => EVENT_ICS_DETAILS[id])
     .filter(Boolean);
   const events = selected.map((event) => [
@@ -367,21 +358,14 @@ const EVENT_ICS_DETAILS = {
     title: "Wedding & Muhurtham",
     start: "20260816T163000Z",
     end: "20260816T200000Z",
-    description: "Wedding morning begins at 9:30 AM Pacific, with the sacred muhurtham at 11:15 AM. Lunch will be served after the muhurtham."
+    description: "Wedding morning begins at 9:30 AM onwards Pacific, with the sacred muhurtham at 11:15 AM. Suggested attire: Indian traditional looks like saree and dhoti shirt are a lovely fit. Lunch will be served after the muhurtham."
   },
-  hightea: {
-    id: "hightea",
-    title: "High Tea & Games",
-    start: "20260816T230000Z",
-    end: "20260817T003000Z",
-    description: "Garden afternoon of tea, chai, light bites, games, and conversation."
-  },
-  sangeet: {
-    id: "sangeet",
-    title: "Reception & Sangeet",
-    start: "20260817T013000Z",
+  evening: {
+    id: "evening",
+    title: "Evening Celebration",
+    start: "20260817T000000Z",
     end: "20260817T060000Z",
-    description: "Dinner, music, performances, and dancing under the lights."
+    description: "Games, fun activities, music, and dancing accompanied by high tea, followed by dinner. Suggested attire: suits, Indian or western evening wear."
   }
 };
 
@@ -407,6 +391,18 @@ function escapeHtml_(value) {
 
 function normalizePhone_(value) {
   return String(value || "").replace(/\D/g, "");
+}
+
+function normalizeEvents_(events) {
+  const allowed = {
+    muhurtham: true,
+    evening: true
+  };
+  return Array.from(new Set(
+    (Array.isArray(events) ? events : [])
+      .map((event) => EVENT_ALIASES[event] || event)
+      .filter((event) => allowed[event])
+  ));
 }
 
 function safeText_(value) {

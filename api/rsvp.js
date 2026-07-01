@@ -1,7 +1,10 @@
 const wedding = require("../data/wedding.json");
 
-const ALLOWED_EVENTS = new Set(["muhurtham", "hightea", "sangeet"]);
-const ALLOWED_ROOM_NIGHTS = new Set(["saturday", "sunday"]);
+const ALLOWED_EVENTS = new Set(["muhurtham", "evening"]);
+const EVENT_ALIASES = {
+  hightea: "evening",
+  sangeet: "evening"
+};
 const RSVP_STATUSES = new Set(["attending", "declined"]);
 const EMAIL_PATTERN = /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?)+$/;
 
@@ -32,6 +35,14 @@ function validateLookupPhone(value) {
   return "";
 }
 
+function normalizeEvents(events) {
+  return [...new Set(
+    (Array.isArray(events) ? events : [])
+      .map((event) => EVENT_ALIASES[event] || event)
+      .filter((event) => ALLOWED_EVENTS.has(event))
+  )];
+}
+
 function getEndpoint() {
   return process.env.RSVP_ENDPOINT || wedding.rsvpEndpoint || "";
 }
@@ -50,12 +61,7 @@ function parseBody(request) {
 
 function validateRsvp(input) {
   const phoneValidation = validatePhone(input.phone || input.whatsapp);
-  const attending = Array.isArray(input.attending)
-    ? input.attending.filter((event) => ALLOWED_EVENTS.has(event))
-    : [];
-  const roomNights = Array.isArray(input.roomNights)
-    ? input.roomNights.filter((night) => ALLOWED_ROOM_NIGHTS.has(night))
-    : [];
+  const attending = normalizeEvents(input.attending);
   const rsvpStatus = RSVP_STATUSES.has(input.rsvpStatus) ? input.rsvpStatus : "attending";
   const guestCount = Number(input.guestCount);
   const rsvp = {
@@ -67,7 +73,7 @@ function validateRsvp(input) {
     email: cleanText(input.email, 160).toLowerCase(),
     side: input.side === "bride" || input.side === "groom" ? input.side : "",
     attending: rsvpStatus === "declined" ? [] : attending,
-    roomNights: rsvpStatus === "declined" ? [] : roomNights,
+    roomNights: [],
     guestCount: Number.isInteger(guestCount) ? guestCount : 0,
     song: cleanText(input.song, 500),
     code: cleanText(input.code, 80),
@@ -88,6 +94,7 @@ function normalizeUpstreamResult(result) {
   if (!result || !result.record) return result;
   const record = { ...result.record };
   record.phone = record.phone || record.whatsapp || "";
+  record.attending = normalizeEvents(record.attending);
   delete record.whatsapp;
   delete record.whatsappNormalized;
   return { ...result, record };

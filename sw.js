@@ -1,4 +1,4 @@
-const CACHE_NAME = "akshwin-static-v58";
+const CACHE_NAME = "akshwin-static-v61";
 const CORE_ASSETS = [
   "./",
   "index.html",

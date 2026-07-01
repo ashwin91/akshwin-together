@@ -1,10 +1,9 @@
 const qs = (selector, root = document) => root.querySelector(selector);
 const qsa = (selector, root = document) => [...root.querySelectorAll(selector)];
 const RSVP_PHONE_STORAGE_KEY = "akshwinRsvpPhone";
-const ROOM_NIGHT_LABELS = {
-  none: "No room needed",
-  saturday: "Saturday, August 15 night",
-  sunday: "Sunday, August 16 night"
+const RSVP_EVENT_ALIASES = {
+  hightea: "evening",
+  sangeet: "evening"
 };
 const GALLERY_ITEMS = [
   {
@@ -339,8 +338,7 @@ function renderEvents() {
   const grid = qs("#events-grid");
   const eventArt = {
     muhurtham: { src: "assets/images/procession.png", position: "center 18%" },
-    hightea: { src: "assets/images/event-high-tea.jpg", position: "center 48%" },
-    sangeet: { src: "assets/images/event-sangeet.jpg", position: "center 48%" }
+    evening: { src: "assets/images/event-sangeet.jpg", position: "center 48%" }
   };
 
   grid.innerHTML = state.data.events
@@ -348,12 +346,17 @@ function renderEvents() {
       const start = new Date(event.start);
       const localStart = formatLocalDateTime(start);
       const timeLabel = event.timeLabel || `${formatVenueTime(start)} PT`;
-      const art = eventArt[event.id] || { src: "assets/images/temple-wide.png", position: "center" };
+      const artItems = event.images?.length
+        ? event.images
+        : [eventArt[event.id] || { src: "assets/images/temple-wide.png", position: "center" }];
+      const mediaClass = artItems.length > 1 ? "event-media event-media--duo" : "event-media";
 
       return `
         <article class="event-card" data-event-id="${event.id}" data-reveal>
-          <div class="event-media">
-            <img src="${art.src}" alt="${event.title} illustration" loading="lazy" style="object-position:${art.position}">
+          <div class="${mediaClass}">
+            ${artItems.map((art) => `
+              <img src="${art.src}" alt="${art.alt || `${event.title} illustration`}" loading="lazy" style="object-position:${art.position || "center"}">
+            `).join("")}
             <h3 class="event-title">${event.title}</h3>
           </div>
           <div class="event-body">
@@ -377,6 +380,15 @@ function renderEvents() {
   qsa("[data-ics]").forEach((button) => button.addEventListener("click", () => downloadIcs(button.dataset.ics)));
   initMotionInteractions(grid);
   observeReveals(grid);
+}
+
+function normalizeRsvpEvents(events) {
+  const allowed = new Set((state.data?.events || []).map((event) => event.id));
+  return [...new Set(
+    (Array.isArray(events) ? events : [])
+      .map((event) => RSVP_EVENT_ALIASES[event] || event)
+      .filter((event) => allowed.has(event))
+  )];
 }
 
 function renderUtilities() {
@@ -1397,29 +1409,11 @@ function initRSVP() {
   const setAttendanceState = (value) => {
     const declined = value === "declined";
     eventsFieldset.dataset.disabled = String(declined);
-    roomFieldset.dataset.disabled = String(declined);
+    if (roomFieldset) roomFieldset.dataset.disabled = String(declined);
     qsa('input[name="events"]', eventsFieldset).forEach((checkbox) => {
       checkbox.disabled = declined;
       if (declined) checkbox.checked = false;
     });
-    qsa('input[name="roomNights"]', roomFieldset).forEach((checkbox) => {
-      checkbox.disabled = declined;
-      if (declined) checkbox.checked = false;
-    });
-  };
-
-  const getRoomNights = (record) => {
-    if (Array.isArray(record.roomNights)) return record.roomNights;
-    if (typeof record.roomNights === "string") {
-      return record.roomNights.split(",").map((value) => value.trim()).filter(Boolean);
-    }
-    return [];
-  };
-
-  const formatRoomNights = (record) => {
-    const nights = getRoomNights(record);
-    if (!nights.length) return "No room requested";
-    return nights.map((night) => ROOM_NIGHT_LABELS[night] || night).join(", ");
   };
 
   const applyPhoneToForm = (value) => {
@@ -1445,17 +1439,13 @@ function initRSVP() {
   };
 
   const renderSummary = (record) => {
-    const attending = Array.isArray(record.attending) ? record.attending : [];
+    const attending = normalizeRsvpEvents(record.attending);
     const responseStatus = getResponseStatus(record);
     const eventTitles = attending
       .map((id) => state.data.events.find((event) => event.id === id)?.title || id)
       .join(", ");
     const guestCount = Number(record.guestCount || 1);
     const updatedAt = record.updatedAt || record.submittedAt || "";
-    const roomSummary = responseStatus === "attending" && getRoomNights(record).length
-      ? ` · Room: ${formatRoomNights(record)}`
-      : "";
-
     const heading = document.createElement("strong");
     heading.textContent = responseStatus === "attending"
       ? "You are celebrating with us"
@@ -1463,7 +1453,7 @@ function initRSVP() {
 
     const details = document.createElement("span");
     details.textContent = responseStatus === "attending"
-      ? `${record.name || "Guest"} · ${guestCount} guest${guestCount === 1 ? "" : "s"} · ${eventTitles}${roomSummary}`
+      ? `${record.name || "Guest"} · ${guestCount} guest${guestCount === 1 ? "" : "s"} · ${eventTitles}`
       : `${record.name || "Guest"} · Unable to attend`;
 
     const meta = document.createElement("small");
@@ -1490,7 +1480,7 @@ function initRSVP() {
   };
 
   const renderConfirmation = (record, action = "saved") => {
-    const attending = Array.isArray(record.attending) ? record.attending : [];
+    const attending = normalizeRsvpEvents(record.attending);
     const responseStatus = getResponseStatus(record);
     const eventTitles = attending
       .map((id) => state.data.events.find((event) => event.id === id)?.title || id)
@@ -1521,8 +1511,7 @@ function initRSVP() {
     if (responseStatus === "attending") {
       rows.push(
         ["Guests", String(guestCount)],
-        ["Events", eventTitles || "Wedding celebration"],
-        ["Room request", formatRoomNights(record)]
+        ["Events", eventTitles || "Wedding celebration"]
       );
     }
     rows.forEach(([label, value]) => {
@@ -1563,7 +1552,7 @@ function initRSVP() {
       const field = form.elements.namedItem(name);
       if (field) field.value = value == null ? "" : value;
     };
-    const attending = Array.isArray(record.attending) ? record.attending : [];
+    const attending = normalizeRsvpEvents(record.attending);
     const responseStatus = getResponseStatus(record);
 
     setValue("name", record.name);
@@ -1576,10 +1565,6 @@ function initRSVP() {
     if (responseField) responseField.value = responseStatus;
     qsa('input[name="events"]', form).forEach((checkbox) => {
       checkbox.checked = attending.includes(checkbox.value);
-    });
-    const roomNights = getRoomNights(record);
-    qsa('input[name="roomNights"]', form).forEach((radio) => {
-      radio.checked = roomNights.length ? roomNights.includes(radio.value) : radio.value === "none";
     });
     setAttendanceState(responseStatus);
     qs("#rsvp-code").value = record.code || (state.kolamUnlocked ? "GOLDENGARLAND" : "");
@@ -1687,8 +1672,8 @@ function initRSVP() {
     event.preventDefault();
     const formData = new FormData(form);
     const rsvpStatus = String(formData.get("rsvpStatus") || "attending");
-    const attending = rsvpStatus === "declined" ? [] : formData.getAll("events");
-    const roomNights = rsvpStatus === "declined" ? [] : formData.getAll("roomNights").filter((value) => value && value !== "none");
+    const attending = rsvpStatus === "declined" ? [] : normalizeRsvpEvents(formData.getAll("events"));
+    const roomNights = [];
     const phoneValidation = validatePhoneNumber(
       String(formData.get("countryCode") || "+1"),
       String(formData.get("phone") || "")

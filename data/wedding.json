@@ -1,6 +1,6 @@
 {
   "siteUrl": "https://akshwin-together.vercel.app",
-  "rsvpEndpoint": "https://script.google.com/macros/s/AKfycbz_7U6uM2h8g1MYeO3KZP0vNeCIsftLHH3wSBuiQI3EsR_382ERBRafXIv_wO2cR0fw8A/exec",
+  "rsvpEndpoint": "https://script.google.com/macros/s/AKfycbwW6iPXzfL-HwYLbuc9gZ3ct0ORhbJccQ8SKePVDs1uXGEGpH2sw557ToCgP-wcV6xuSA/exec",
   "whatsappPhone": "",
   "couple": {
     "bride": "Akshata",
@@ -35,40 +35,38 @@
       "title": "Wedding & Muhurtham",
       "start": "2026-08-16T09:30:00-07:00",
       "end": "2026-08-16T13:00:00-07:00",
-      "timeLabel": "9:30 AM · Muhurtham at 11:15 AM",
-      "note": "The wedding morning begins at 9:30 AM, with the sacred muhurtham at 11:15 AM. Lunch will be served after the muhurtham.",
-      "dressCode": "South Indian traditional",
-      "ritual": "South Indian traditional looks are a lovely fit for the morning, but please treat this as a suggestion. Come comfortable, joyful, and ready to celebrate."
+      "timeLabel": "9:30 AM onwards · Muhurtham at 11:15 AM",
+      "note": "The wedding morning begins at 9:30 AM onwards, with the sacred muhurtham at 11:15 AM. Lunch will be served after the muhurtham.",
+      "dressCode": "Indian traditional",
+      "ritual": "Indian traditional looks like saree and dhoti shirt are a lovely fit for the morning, but please treat this as a suggestion. Come comfortable, joyful, and ready to celebrate."
     },
     {
-      "id": "hightea",
-      "title": "High Tea & Games",
-      "start": "2026-08-16T16:00:00-07:00",
-      "end": "2026-08-16T17:30:00-07:00",
-      "timeLabel": "4:00 PM",
-      "note": "A relaxed garden afternoon with tea, chai, light bites, games, and conversation",
-      "dressCode": "Dresses & suits",
-      "ritual": "Garden-party dresses, suits, and cheerful colors will feel right at home. The recommendation is optional; the main assignment is having a wonderful afternoon."
-    },
-    {
-      "id": "sangeet",
-      "title": "Reception & Sangeet",
-      "start": "2026-08-16T18:30:00-07:00",
+      "id": "evening",
+      "title": "Evening Celebration",
+      "start": "2026-08-16T17:00:00-07:00",
       "end": "2026-08-16T23:00:00-07:00",
-      "timeLabel": "6:30 PM onwards",
-      "note": "Dinner, music, performances, and dancing under the lights",
-      "dressCode": "Indian or Western evening wear",
-      "ritual": "Festive Indian outfits, western formalwear, evening dresses, suits, and western wear are all welcome. Dress up if you feel like it; dance either way."
+      "timeLabel": "5:00 PM onwards",
+      "note": "Games · Fun Activities · Music & Dancing",
+      "dressCode": "Suits, Indian or western evening wear",
+      "ritual": "Games, fun activities, music, and dancing accompanied by high tea, followed by dinner.",
+      "images": [
+        {
+          "src": "assets/images/event-high-tea.jpg",
+          "alt": "High Tea garden celebration",
+          "position": "center 48%"
+        },
+        {
+          "src": "assets/images/event-sangeet.jpg",
+          "alt": "Reception and sangeet celebration",
+          "position": "center 48%"
+        }
+      ]
     }
   ],
   "travel": [
     {
       "title": "Airport",
       "body": "Seattle-Tacoma International Airport is the easiest arrival point. Plan extra buffer for Sunday traffic toward Redmond."
-    },
-    {
-      "title": "Stay",
-      "body": "A limited set of rooms will be reserved for guests and offered on a first-RSVP basis. Please note whether you would like a room for Saturday, August 15 night or Sunday, August 16 night in the RSVP so we can plan the room blocks."
     },
     {
       "title": "Rental Cars",
@@ -78,7 +76,7 @@
   "faq": [
     {
       "question": "When should we arrive if we want zero drama?",
-      "answer": "For the wedding morning, arriving by 9:30 AM is perfect. The muhurtham is at 11:15 AM, and we would love everyone settled before the sacred moment begins."
+      "answer": "For the wedding morning, arriving from 9:30 AM onwards is perfect. The muhurtham is at 11:15 AM, and we would love everyone settled before the sacred moment begins."
     },
     {
       "question": "Do we have to follow the outfit suggestions?",
@@ -86,7 +84,7 @@
     },
     {
       "question": "Will there be food, or should we pack emergency snacks?",
-      "answer": "You will be fed. There will be wedding lunch, high tea, dinner, and enough celebration energy to make snack planning feel overly serious."
+      "answer": "You will be fed. There will be wedding lunch and an evening celebration with high tea, dinner, music, dancing, and enough celebration energy to make snack planning feel overly serious."
     },
     {
       "question": "What is the easiest way to get around?",
