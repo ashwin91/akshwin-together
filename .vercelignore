@@ -1,11 +1,17 @@
 .DS_Store
 .claude/
+.claude/**
 .git/
+.git/**
 .vercel/
+.vercel/**
 CLAUDE.md
 README.md
 scripts/
+scripts/**
 /video/
+video/
+video/**
 assets/images/event-muhurtham.png
 assets/images/event-muhurtham.jpg
 assets/images/event-high-tea.png
