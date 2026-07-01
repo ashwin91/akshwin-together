@@ -43,7 +43,13 @@ npx --yes vercel@latest deploy --prod --yes --archive=tgz
 
 The upload occasionally fails with an SSL `bad record mac` error. If it does, confirm no deployment was created and retry the exact same command once. Do not switch to custom upload scripts or another project directory.
 
-If the CLI keeps trying to upload the whole working tree, create a clean linked copy under `/private/tmp` with the same `.vercel/project.json`, excluding source-only folders like top-level `video/`, `.git/`, `scripts/`, and unused video variants. Deploy from that clean copy with the same command above. Keep the production story videos under `assets/video/` included.
+If the CLI keeps trying to upload the whole working tree, create a clean linked copy under `/private/tmp` with the same `.vercel/project.json`, excluding source-only folders like top-level `video/`, `.git/`, `scripts/`, and unused video variants. Deploy from that clean copy with the same command above first. If archive mode still repeatedly fails with the SSL `bad record mac` upload error, use the standard Vercel upload path from the same clean copy:
+
+```bash
+npx --yes vercel@latest deploy --prod --yes
+```
+
+Keep the production story videos under `assets/video/` included.
 
 Deploy packaging notes learned from production:
 
